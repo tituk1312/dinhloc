@@ -118,8 +118,25 @@
             <div class="before"></div>
         </div>
     </div>
-</body>
     <audio id="mynhac" src="trinh.mp3" autoplay loop></audio>
+    <script>
+        // Cố gắng phát nhạc ngay sau khi trang load
+        window.addEventListener('load', function() {
+        const audio = document.getElementById('mynhac');
+        const playPromise = audio.play();
+
+        if (playPromise !== undefined) {
+            playPromise.catch(error => {
+            // Nếu bị chặn, thử phát lại sau vài giây
+            setTimeout(() => {
+                audio.play();
+            }, 1000);
+           });
+        }
+      });
+    </script>
+</body>
+    
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script>
     $(window).on('load', function(event){
